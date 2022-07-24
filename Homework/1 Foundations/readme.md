@@ -6,4 +6,4 @@ Problem 3: Ethical Issue Spotting \
 Problem 4: Programming
 
 Code was graded using the provided ```grader.py```  \
-My solutions to the written and programming assignments
+My solutions to the written (in pdf) and programming assignments (```submission.py```)
