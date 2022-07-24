@@ -5,5 +5,5 @@ Problem 2: Complexity \\
 Problem 3: Ethical Issue Spotting \\
 Problem 4: Programming
 
-Code was graded using the provided ```'''grader.py'''``` file
+Code was graded using the provided ```grader.py```  \\
 My solutions to the written and programming assignments
