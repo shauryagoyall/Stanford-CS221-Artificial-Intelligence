@@ -1,0 +1,305 @@
+<head>
+    <title>Foundations</title>
+    <script src="plugins/main.js"></script>
+    <script src="grader-all.js"></script>
+</head>
+
+<body onload="onLoad('foundations', '<a href=mailto:fyu9@stanford.edu>Kathy Yu<a>', '09/20/2021', 'https://edstem.org/us/courses/13379/discussion/621131')">
+
+<div id="assignmentHeader"></div>
+
+<p>
+    Welcome to your first CS221 assignment!
+    The goal of this assignment is to sharpen your math, programming, and ethical analysis skills 
+    needed for this class. If you meet the prerequisites, you should find these
+    problems relatively innocuous. Some of these problems will occur again
+    as subproblems of later homeworks, so make sure you know how to do them.
+    If you're unsure about them or need a refresher,
+    we recommend going through our prerequisites module or other resources on the Internet,
+    or coming to office hours.
+    <br>
+    <br>
+    <b>Before you get started, please read the Homeworks section on the course website thoroughly</b>.
+    <br>
+
+</p>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Problem 1: Optimization and probability</div>
+
+<p>
+    In this class, we will cast a lot of AI problems as optimization problems, that is, finding the best
+    solution in a rigorous mathematical sense.
+    At the same time, we must be adroit at coping with uncertainty in the world,
+    and for that, we appeal to tools from probability.
+</p>
+
+<ol class="problem">
+
+    <li class="writeup" id="1a">
+        Let $x_1, \dots, x_n$ be real numbers representing positions on a number line.
+        Let $w_1, \dots, w_n$ be positive real numbers representing the importance of each of these positions.
+        Consider the quadratic function: $f(\theta) = \sum_{i=1}^n w_i (\theta - x_i)^2$. Note that $\theta$ here is a scalar.
+        What value of $\theta$ minimizes $f(\theta)$? Show that the optimum you find is indeed a minimum. What
+        problematic issues could arise if some of the $w_i$'s are negative?
+        <br><br>Note: You can think about this problem as trying to find the point $\theta$ that's not too far
+        away from the $x_i$'s. Over time, hopefully you'll appreciate how nice quadratic functions are to minimize.
+        <div class="expected">An expression for the value of $\theta$ that minimizes $f(\theta)$ and how you got it. A short calculation/argument to show that it is a minimum. 1-2 sentences describing a problem that could arise if some of the $w_i$'s are negative.</div>
+    </li>
+
+    <li class="writeup" id="1b">
+        In this class, there will be a lot of sums and maxes.
+        Let's see what happens if we switch the order.
+        Let $f(\mathbf x) = \max_{s \in [-1,1]} \sum_{i=1}^d s x_i$
+        and $g(\mathbf x) = \sum_{i=1}^d \max_{s_i \in [-1,1]} s_i x_i$,
+        where $\mathbf x = (x_1, \dots, x_d) \in \mathbb{R}^d$ is a real vector.
+        Which of $f(\mathbf x) \le g(\mathbf x)$, $f(\mathbf x) = g(\mathbf x)$, or $f(\mathbf x) \ge g(\mathbf x)$ is true for
+        all $\mathbf x$?
+        Prove it.
+        <br><br>Hint: You may find it helpful to refactor the expressions so that they
+        are maximizing the same quantity over different sized sets.
+        <div class="expected">A short (3-5) line/sentence proof. You should use mathematical notation in your proof, but can also make your argument in words.</div>
+    </li>
+
+    <li class="writeup" id="1c">
+        Suppose you repeatedly roll a fair six-sided die until you roll a $1$ or a $2$ (and then you stop).
+        Every time you roll a $3$, you lose $a$ points, and every time you roll a $6$, you win $b$ points. You do not win
+        or lose any points if you roll a $4$ or a $5$.
+        What is the expected number of points (as a function of $a$ and $b$) you will have when you stop?
+        <br><br>Hint: You will find it helpful to define a recurrence. If you define $V$ as the expected number of points you get from playing the game, what happens if you roll a $3$? You lose $a$ points and then get to play again. What about the other cases? Can you write this as a recurrence?
+
+        <div class="expected">A recurrence to represent the problem and the resulting expression from solving the recurrence (no more than 1-2 lines).</div>
+    </li>
+
+    <li class="writeup" id="1d">
+        Suppose the probability of a coin turning up heads is $0 \lt p \lt 1$,
+        and we flip it $6$ times and get $\{ \text{T}, \text{H}, \text{H}, \text{H}, \text{T} , \text{H} \}$.
+        We know the probability (likelihood) of obtaining this
+        sequence is $L(p) = (1-p) p p p (1-p) p = p^4(1-p)^2$.
+        What value of $p$ maximizes $L(p)$?
+        Prove/Show that this value of $p$ maximizes $L(p)$.
+        What is an intuitive interpretation of this value of $p$?
+        <br><br>Hint: Consider taking the derivative of $\log L(p)$. You can also directly take the derivative of $L(p)$,
+        but it is cleaner and more natural to differentiate $\log L(p)$. You can verify for yourself
+        that the value of $p$ which maximizes $\log L(p)$ must also maximize $L(p)$ (you are not required to prove this
+        in your solution).
+        <div class="expected">The value of $p$ that maximizes $L(p)$ and the work/calculation used to solve for it. Note that you must prove/show that it is a maximum. A 1-sentence intuitive interpretation of the value of $p$.</div>
+    </li>
+
+    <li class="writeup" id="1e">
+        Now for a little bit of practice manipulating conditional probabilities. Suppose that $A$ and $B$ are two events such that $P(A|B) = P(B|A)$. We also know that and $P(A \cup B) = \frac{1}{2}$ and $P(A \cap B) > 0$. Prove that $P(A) > \frac{1}{4}$.
+
+        <br><br>Hint: Note that $A$ and $B$ are not necessarily mutually exclusive. Consider how we can relate $P(A \cup B)$ and $P(A \cap B)$.
+
+        <div class="expected">A short (~5 line) proof/derivation.</div>
+    </li>
+
+    <li class="writeup" id="1f">
+        Let's practice taking gradients,
+        which is a key operation for being able to optimize continuous functions.
+        For $\mathbf w \in \mathbb R^d$ (represented as a column vector), and constants $\mathbf a_i, \mathbf b_j \in
+        \mathbb R^d$ (also represented as column vectors), $\lambda \in \mathbb R$, and a positive integer $n$, define
+        the scalar-valued function
+        $$f(\mathbf w) = \Bigg( \sum_{i=1}^n \sum_{j=1}^n (\mathbf a_i^\top \mathbf w - \mathbf b_j^\top \mathbf w)^2 \Bigg) + \frac{\lambda}{2}
+        \|\mathbf w\|_2^2,$$
+        where the vector is $\mathbf w = (w_1, \dots, w_d)^\top$ and $\|\mathbf w\|_2 = \sqrt{\sum_{k=1}^d w_k^2} = \sqrt{{\mathbf w}^T {\mathbf w}}$ is
+        known as the $L_2$ norm.
+        Compute the gradient $\nabla f(\mathbf w)$.
+        <br><br>Recall: the gradient is a $d$-dimensional vector of the partial derivatives with respect to each $w_i$:
+        $$\nabla f(\mathbf w) = \left(\frac{\partial f(\mathbf w)}{\partial w_1}, \dots \frac{\partial f(\mathbf
+        w)}{\partial w_d}\right)^\top.$$
+        If you're not comfortable with vector calculus, first warm up by working out this problem using scalars in
+        place of vectors and derivatives in place of gradients.
+        Not everything for scalars goes through for vectors, but the two should at least be consistent with each other
+        (when $d=1$).
+        Do not write out summations over dimensions, because that gets tedious.
+
+        <div class="expected">An expression for the gradient and the work used to derive it. (~5 lines). No need to expand out terms unnecessarily; try to write the final answer compactly.</div>
+    </li>
+
+</ol>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Problem 2: Complexity</div>
+
+<p>
+    When designing algorithms, it's useful to be able to do quick back-of-the-envelope
+    calculations to see how much time or space an algorithm needs.
+    Hopefully, you'll start to get more intuition for this by being exposed
+    to different types of problems.
+</p>
+
+<ol class="problem">
+
+    <li class="writeup" id="2a">
+        Suppose we have an $n \times n$ grid, where we'd like to place $4$ arbitrary axis-aligned rectangles (i.e., the sides of the rectangle are parallel to the axes).
+        There are no constraints on the location or size of the rectangles. For example, it is possible for all four corners of a single rectangle to be the same point (resulting in a rectangle of size 0) or for all $4$ rectangles to be on top of each other.
+        How many possible ways are there to place $4$ rectangles on the grid?
+        In general, we only care about asymptotic complexity,
+        so give your answer in the form of $O(n^c)$ or $O(c^n)$ for some integer $c$.
+        <br><br>Note: It is unnecessary to consider whether order matters in this problem, since we are asking for asymptotic complexity. You are free to assume either in your solution, as it doesn’t change the final answer.
+
+        <div class="expected">A big-O bound for the number of possible ways to place $4$ rectangles and some simple explanation/reasoning for the answer (~2 sentences).</div>
+    </li>
+
+    <li class="writeup" id="2b">
+        Suppose we have an $n\times 3n$ grid.
+        We start in the upper-left corner (position $(1,1)$), and we would like to reach the lower-right corner
+        (position $(n,3n)$) by taking single steps down or to the right.
+        Suppose we are provided with a function $c(i, j)$ that outputs the cost of going through position $(i, j)$, and assume it takes constant time to compute for each position.
+        Note that $c(i, j)$ can be negative.
+        Give an algorithm for computing the cost of the minimum-cost path from $(1,1)$ to $(n,3n)$ in the most efficient way (with the smallest big-O time complexity).
+        What is the runtime (just give the big-O)?
+
+        <div class="expected">A description of the algorithm for computing the cost of the minimum-cost path as efficiently as possible (~5 sentences). The big-O runtime and a short explanation of how it arises from the algorithm.</div>
+    </li>
+
+</ol>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Problem 3: Ethical Issue Spotting</div>
+
+<p>
+One of the goals of this course is to teach you how to tackle real-world problems with tools from AI.  But real-world problems have real-world consequences. Along with technical skills, an important skill every practitioner of AI needs to develop is an awareness of the ethical issues associated with AI. The purpose of this exercise is to practice spotting potential ethical concerns in applications of AI - even seemingly innocuous ones.
+<br>
+<br>
+In this question, you will explore the ethics of four different real-world scenarios using the ethics guidelines produced by a machine learning research venue, the NeurIPS conference. The <a href="https://neurips.cc/public/EthicsGuidelines">NeurIPS Ethical Guidelines</a> list sixteen non-exhaustive concerns under Potential Negative Social Impacts and General Ethical Conduct (the numbered lists). For each scenario, you will write a potential negative impacts statement. To do so, you will first determine if the algorithm / dataset / technique could have a potential negative
+social impact or violate general ethical conduct (again, the sixteen numbered items taken from the <a href="https://neurips.cc/public/EthicsGuidelines">NeurIPS Ethical Guidelines</a> page). If the scenario does violate ethical conduct or has potential negative social impacts, list one concern it violates and justify why you think that concern applies to the scenario. If you do <b>not</b> think the scenario has an ethical concern, explain how you came to that decision. 
+Unlike earlier problems in the homework there are many possible good answers. If you can justify your answer, then you should feel confident that you have answered the question well. 
+<br>
+<br>
+Each of the scenarios is drawn from a real AI research paper. The ethics of AI research closely mirror the potential real-world consequences of deploying AI, and the lessons you’ll draw from this exercise will certainly be applicable to deploying AI at scale. As a note, you are <b>not</b> required to read the original papers, but we have linked to them in case they might be useful. Furthermore, you are welcome to respond to anything in the linked article that's not mentioned in the written scenario, but the scenarios as described here should provide enough detail to find at least one concern.
+<br>
+<div class="expected">A 2-5 sentence paragraph for each of the scenarios where you either A. identify at least one ethical concern from the <a href="https://neurips.cc/public/EthicsGuidelines">NeurIPS Ethical Guidelines</a> and justify why you think it applies, or B. state that you don’t think a concern exists and justify why that’s the case. Chosen scenarios may have anywhere from zero to multiple concerns that match, but you are only required to pick one concern (if it exists) and justify your decision accordingly. Furthermore, copy out and underline the ethical checklist item to which you are referring as part of your answer (i.e.: <u>Severely damage the environment</u>). We have also included a citation in the example solution below, but you are not required to add citations to your response. 
+</div>
+<br>
+<b>Example Scenario</b>: 
+You work for a U.S. hospital that has recently implemented a new intervention program that enrolls at-risk patients in programs to help address their chronic medical issues proactively before the patients end up in the hospital. The intervention program automatically identifies at-risk patients by predicting patients’ risk scores, which are measured in terms of healthcare costs. However, you notice that for a given risk score tier, the Black patients are considerably sicker when enrolled than white patients, even though their assigned illness risk score is identical. You manually re-assign patients’ risk scores based on their current symptoms and notice that the percentage of Black patients who would be enrolled has increased from 17%  to over 45% <a href="#fn-1">[1]</a>.
+<br>
+<br>
+<b>Example Solution</b>: This algorithm has likely <u>encoded, contains, or potentially exacerbates bias against people of a certain race or ethnicity</u> since the algorithm predicts healthcare costs. Because access to medical care in the U.S. is unequal, Black patients tend to have lower healthcare costs than their white counterparts <a href="#fn-2">[2]</a>. Thus the algorithm will incorrectly predict that they are at lower risk.
+<ol class="problem">
+    <li class="writeup" id="3a">
+An investment firm develops a simple machine learning model to predict whether an individual is likely to default on a loan from a variety of factors, including location, age, credit score, and public record. After looking through their results, you find that the model predicts mainly based on location and that the model mainly accepts loans from urban centers and denies loans from rural applicants <a href="#fn-3">[3]</a>. Furthermore, looking at the gender and ethnicity of the applicants, you find that the model has a significantly higher false positive rate for Black and male applicants than for other groups. In a false positive prediction, a model misclassifies someone who does not default as likely to default.
+    </li>
+    <li class="writeup" id="3b">
+Stylometry is a way of predicting the author of contested or anonymous text by analyzing the writing patterns in the anonymous text and other texts written by the potential authors. Recently, highly accurate machine learning algorithms have been developed for this task. While these models are typically used to analyze historical documents and literature, they could be used for deanonymizing a wide range of texts, including code <a href="#fn-4">[4]</a>. 
+    </li>
+    <li class="writeup" id="3c">
+A research group scraped millions of faces of celebrities off of Google images to develop facial recognition technology <a href="#fn-5">[5]</a>. The celebrities did not give permission for their images to be used in the dataset and many of the images are copyrighted. For copyrighted photos, the dataset provides URL links to the original image along with bounding boxes for the face. 
+    </li>
+    <li class="writeup" id="3d">
+ Researchers have recently created a machine learning model that can predict plant species automatically directly from a single photo <a href="#fn-6">[6]</a>. The model was trained using photos uploaded to the iNaturalist app by users who consented to use of their photos for research purposes, and the model is only used within the app to help users identify plants they might come across in the wild.
+    </li>
+</ol>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Problem 4: Programming</div>
+
+<p>
+    In this problem, you will implement a bunch of short functions. The main
+    purpose of this exercise is to familiarize yourself with Python,
+    but as a bonus, the functions that you will implement will come in handy in
+    subsequent homeworks.
+    <br>
+    <br>
+    <b>Do not import any outside libraries (e.g. numpy).</b> Only standard Python
+    libraries and/or the libraries imported in the starter code are allowed.
+</p>
+
+<p>
+    If you're new to Python, the following provide pointers to various
+    tutorials and examples for the language:
+</p>
+<ul>
+    <li><a href="http://wiki.python.org/moin/BeginnersGuide/Programmers">Python for Programmers</a></li>
+    <li><a href="http://wiki.python.org/moin/SimplePrograms">Example programs of increasing complexity</a></li>
+</ul>
+<div class="expected"> Python code implementing the functions provided in submission.py. Try to make your code as clean and simple as possible and be sure to write your answers between the begin answer and end answer comments.</div>
+<ol class="problem">
+
+    <li class="code" id="4a">
+        Implement <code>find_alphabetically_first_word</code> in <code>submission.py</code>.
+    </li>
+    <li class="code" id="4b">
+        Implement <code>euclidean_distance</code> in <code>submission.py</code>.
+    </li>
+    <li class="code" id="4c">
+        Implement <code>mutate_sentences</code> in <code>submission.py</code>.
+    </li>
+    <li class="code" id="4d">
+        Implement <code>sparse_vector_dot_product</code> in <code>submission.py</code>.
+    </li>
+    <li class="code" id="4e">
+        Implement <code>increment_sparse_vector</code> in <code>submission.py</code>.
+    </li>
+    <li class="code" id="4f">
+        Implement <code>find_nonsingleton_words</code> in <code>submission.py</code>.
+    </li>
+
+</ol>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Problem 5: Background Survey</div>
+
+<p>
+    As a big class and the first AI/ML course taken by many students, CS221 has a wide range of people coming from different backgrounds.
+    On top of that, the transition to remote learning has created new challenges for all of us. We know that these challenges affect students unevenly and to different degrees depending on their individual circumstances.
+    As a result, we've put together a quick survey to get a little more information about the background of everyone in the class and figure out what we can do to best support each one of you this quarter.
+    <br>
+    <br>
+    Please fill out the Google form <u><a href="https://forms.gle/LffoVtL4rd2q8M4X6" target="_blank"> here</a></u>.
+    <br>
+    <br>
+    This survey is optional and will not be graded, so your answers will not affect your grade whatsoever.
+    However, it will be a huge help to us in making CS221 a great experience for everyone!
+
+    <div class="expected">Just fill out the survey!</div>
+</p>
+
+<!------------------------------------------------------------>
+<div class="problemTitle">Submission</div>
+
+<p>
+    Submission is done on Gradescope.
+
+    <br>
+    <br>
+    <b>Written:</b> When submitting the written parts, make sure to select <b>all</b> the pages
+    that contain part of your answer for that problem, or else you will not get credit.
+    To double check after submission, you can click on each problem link on the right side, and it should show
+    the pages that are selected for that problem.
+    <br>
+    <br>
+    <b>Programming:</b> After you submit, the autograder will take a few minutes to run. Check back after
+    it runs to make sure that your submission succeeded. If your autograder crashes, you will receive a 0 on the
+    programming part of the assignment. Note: the only file to be submitted to Gradescope is <code>submission.py</code>.
+    <br>
+    <br>
+    More details can be found in the Submission section on the course website.
+</p>
+
+<!------------------------------------------------------------>
+<div id="feedback" data-survey-url="https://forms.gle/JzuYMk7sSRUEXDss7"></div>
+
+<hr/>
+<p id="fn-1"> [1]
+<a href="https://doi.org/10.1126/science.aax2342">Obermeyer et al. Dissecting racial bias in an algorithm used to manage the health of populations. 2019. </a>
+</p>
+<p id="fn-2"> [2]
+<a href="https://www.nap.edu/catalog/10260/unequal-treatment-confronting-racial-and-ethnic-disparities-in-health-care">Institue of Medicine of the National Academies. Unequal Treatment:
+Confronting Racial and Ethnic Disparities in Health Care. 2003.</a>
+</p>
+<p id="fn-3"> [3] 
+<a href="https://www.kaggle.com/c/loan-default-prediction/data">Imperial College London. Loan Default Prediction Dataset. 2014.</a>
+</p>
+<p id="fn-4"> [4]
+<a href="https://dl.acm.org/doi/10.5555/2831143.2831160">Caliskan-Islam et. al. De-anonymizing programmers via code stylometry. 2015.</a>
+</p>
+<p id="fn-5"> [5]
+<a href="https://www.robots.ox.ac.uk/~vgg/data/vgg_face/">Parkhi et al. VGG Face Dataset. 2015.</a>
+</p>
+<p id="fn-6"> [6]
+<a href="https://www.inaturalist.org/blog/31806-a-new-vision-model">iNaturalist. A new vision model. 2020.</a>
+</p>
+</body>
