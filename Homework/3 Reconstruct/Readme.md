@@ -1,7 +1,7 @@
-reconstruct.pdf has the questions and the write-up solutions 
+```reconstruct.pdf``` has the questions and the write-up solutions 
 
-submission.py has the coding solutions
+```submission.py``` has the coding solutions
 
-grader.py was used to check my work
+```grader.py``` was used to check my work
 
-index.html has all the questions and the instructions
+```index.html``` has all the questions and the instructions
